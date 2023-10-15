@@ -18,6 +18,8 @@ import {
   Platform,
 } from 'react-native';
 
+const ADDITIONAL_TREE_LEVELS = 100;
+
 export const testProps = (testID: string) => {
   if (Platform.OS === 'ios') {
     return {
@@ -42,6 +44,28 @@ function App(): JSX.Element {
     setPassword('');
     setLogin(false);
   };
+
+  const renderLoginButton = (levelsToCreate:number) => {
+
+    if(levelsToCreate>0){
+      return (
+        <View
+          {...testProps(`deepTreeLevel${levelsToCreate}`)}
+        >
+          {renderLoginButton(levelsToCreate-1)}
+        </View>
+      )
+    }
+
+    return(
+      <Pressable
+        style={[styles.buttonContainer]}
+        {...testProps('login-button')}
+        onPress={() => setLogin(!login)}>
+        <Text style={styles.textStyle}>Login</Text>
+      </Pressable>
+    )
+  }
 
   return (
     <SafeAreaView
@@ -77,12 +101,7 @@ function App(): JSX.Element {
         {login ? 'success' : 'fail'}
       </Text>
 
-      <Pressable
-        style={styles.buttonContainer}
-        {...testProps('login-button')}
-        onPress={() => setLogin(!login)}>
-        <Text style={styles.textStyle}>Login</Text>
-      </Pressable>
+      {renderLoginButton(ADDITIONAL_TREE_LEVELS)}
 
       <Pressable
         style={[styles.buttonContainer, {backgroundColor: 'coral'}]}
@@ -123,7 +142,7 @@ const styles = StyleSheet.create({
     color: 'black',
   },
   buttonContainer: {
-    width: '80%',
+    width: 200,
     backgroundColor: '#3CB371',
     borderRadius: 25,
     height: 50,

@@ -18,6 +18,7 @@ const ios = {
   'appium:deviceName': 'iPhone 14',
   'appium:automationName': 'XCUITest',
   'appium:bundleId': 'org.reactjs.native.example.TestForE2E',
+  'appium:settings[snapshotMaxDepth]': 62,
 };
 
 if (!process.env.E2E_DEVICE) {
