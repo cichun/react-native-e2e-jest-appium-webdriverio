@@ -24,7 +24,7 @@ The test app has 2 inputs and a deeply nested _Login_ button.
 Appium will fail getting the _Login_ button, because it is more that 50 levels nested in The Components Tree.
 
 
-<img src="Assets/theTestApp.png" width="400">
+<img src="assets/theTestApp.png" width="400">
 
 ## Run the tests
 To run the tests run command:
