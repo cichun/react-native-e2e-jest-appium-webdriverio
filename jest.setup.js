@@ -21,6 +21,7 @@ beforeAll(async () => {
 
 afterAll(async () => {
   console.info('[afterAll] Done with testing!');
+  await client.pause(5000);
   await client.deleteSession();
 });
 
