@@ -73,7 +73,7 @@ Now it works!
 ![AppiumTestsSucceeds.png](assets%2FAppiumTestsSucceeds.png)
 
 ### Appium Inspector again
-![AppiumTestsSucceeds.png](assets%2FAppiumTestsSucceeds.png)
+![appiumInspector2.png](assets%2FappiumInspector2.png)
 
 The Components Tree has been flattened - now the `Login` button is in the 10th level - so it is accessible to appium webdriver.
 
