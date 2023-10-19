@@ -7,7 +7,7 @@
 ## Info
 It's a fork of https://github.com/kelset/react-native-e2e-jest-appium-webdriverio just to showcase problems with getting a component in Appium tests for iOS when there are Deep Components Tree.
 
-A solution for some people might be running the app in _**React Native New Architecure**_, which uses **Fabric** as a renderer. The Fabric uses a mechanism called View Falttening, which might solve this problem. 
+A solution for some people might be running the app in _**React Native New Architecure**_, which uses **Fabric** as a renderer. The Fabric uses a mechanism called View Flattening, which might solve this problem. 
 Before reading further read 2 articles to get basic knowledge:
  - https://reactnative.dev/architecture/view-flattening
  - https://github.com/reactwg/react-native-new-architecture/discussions/110
@@ -21,7 +21,7 @@ https://github.com/kelset/react-native-e2e-jest-appium-webdriverio/blob/main/REA
 
 ## The App
 The test app has 2 inputs and a deeply nested _Login_ button. 
-Appium will fail getting the _Login_ button, because it is more that 50 levels nested in The Components Tree.
+Appium will fail getting the _Login_ button, because it is more than 50 levels nested in The Components Tree.
 
 
 <img src="assets/theTestApp.png" width="400">
@@ -45,18 +45,24 @@ Bad things will happen If you try to push it further - 62 is total max!!
 The Components Tree looks similar in Apple Accessibility Inspector:
 ![accessibilityInspector1.png](assets%2FaccessibilityInspector1.png)
 
-# React Native New Architecture & View Flattening to the rescue
-Reinstal pods to use the RN New Architecture
+# React Native New Architecture & View Flattening to the rescue 🛟
+1) Reinstal pods to use the RN New Architecture
 ```
 cd ios
-RCT_NEW_ARCH_ENABLED=1 pod install
+RCT_NEW_ARCH_ENABLED=1 bundle exec pod install
 ```
-rebuild the app
-```run ios```
 
-start Metro
-`yarn start`
-Now you should notice in the Metro console a flag indicating it uses RN New Architecture and Fabric Renderer
+2. rebuild the app
+```
+yarn run ios
+```
+
+3. start Metro
+```
+yarn start
+```
+
+In the Metro console you should notice a flag indicating it uses RN New Architecture and Fabric Renderer
 ![MetroFabric.png](assets%2FMetroFabric.png )
 
 This means that now the app uses The View Flattening Mechanism https://reactnative.dev/architecture/view-flattening which reduces unnecessary component levels.
@@ -73,6 +79,13 @@ The Components Tree has been flattened - now the `Login` button is in the 10th l
 
 also in Apple Accessibility Inspector, the tree looks much better:
 ![accessibilityInspector2.png](assets%2FaccessibilityInspector2.png)
+
+
+
+# Known Issues
+There's a known issue with getting element value in Fabric, more on this:
+https://github.com/facebook/react-native/issues/38709
+
 
 
 # The original README
